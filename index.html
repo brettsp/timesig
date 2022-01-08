@@ -27,6 +27,7 @@
     <input type="number" id="speedInput" name="speed" min="60" max="120">
     <button id="startButton">Start</button>
     <button id="stopButton">Stop</button>
+    <button id="beepButton">Beep</button>
 
     <script>
         // Get the #app element
@@ -39,6 +40,7 @@
          * Play the chime sound
          */
         function playSound() {
+            console.log('beep');
             let ding = new Audio('./ding.mp3');
             ding.play();
         }
@@ -68,12 +70,13 @@
                     playSound();
                 }
 
-            }, getInterval());
+            }, 1000);
         }
 
 
 
         document.getElementById("startButton").onclick = start;
+        document.getElementById("beepButton").onclick = playSound;
     </script>
 
 </body>
