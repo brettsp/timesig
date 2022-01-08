@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Timer</title>
+
+    <style type="text/css">
+        body {
+            margin: 0 auto;
+            max-width: 40em;
+            width: 88%;
+        }
+
+        #app {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Timer</h1>
+
+    <div id="app" aria-live="polite">5</div>
+
+    <input type="number" id="speedInput" name="speed" min="60" max="120">
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+
+    <script>
+        // Get the #app element
+        let app = document.querySelector('#app');
+
+        // Track the count
+        let count = 5;
+
+        /**
+         * Play the chime sound
+         */
+        function playSound() {
+            let ding = new Audio('./ding.mp3');
+            ding.play();
+        }
+
+        function onStart() { }
+
+        function onStop() { }
+
+        function getInterval() {
+            let speed = document.getElementById("speedInput").value;
+            return 60 / speed * 1000;
+        }
+
+        function start() {
+            //Run a callback function once every second
+            let timer = setInterval(function () {
+
+                // Reduce count by 1
+                count--;
+
+                // Update the UI
+                if (count > 0) {
+                    app.textContent = count;
+                } else {
+                    app.textContent = '⏰';
+                    clearInterval(timer);
+                    playSound();
+                }
+
+            }, getInterval());
+        }
+
+
+
+        document.getElementById("startButton").onclick = start;
+    </script>
+
+</body>
+
+</html>
